@@ -128,3 +128,8 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'users.Usuario'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://telemetria-maicao-production.up.railway.app',
+    'http://localhost:4200',
+]
