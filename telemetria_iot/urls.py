@@ -13,4 +13,5 @@ urlpatterns = [
     path('api/tanks/', include('tanks.urls')),
     path('api/readings/', include('readings.urls')),
     path('api/alerts/', include('alerts.urls')),
+    path('api/system/', include('system_logs.urls')),
 ]
