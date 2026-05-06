@@ -47,9 +47,14 @@ def log_tank_save(sender, instance, created, **kwargs):
 
 @receiver(post_delete, sender=Tank)
 def log_tank_delete(sender, instance, **kwargs):
+    owner_username = instance.owner.username if instance.owner else 'desconocido'
     SystemLog.objects.create(
         log_type='TANK_DELETED',
         level='WARNING',
-        message=f'Tanque "{instance.name}" eliminado',
-        metadata={'tank_name': instance.name}
+        message=f'Tanque "{instance.name}" del usuario "{owner_username}" eliminado',
+        user=instance.owner if instance.owner else None,
+        metadata={
+            'tank_name': instance.name,
+            'owner': owner_username
+        }
     )
