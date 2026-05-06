@@ -252,34 +252,7 @@ def api_root(request):
           <div class="endpoint-name">Logs del Sistema</div>
           <div class="endpoint-url">/api/system/logs/ →</div>
         </a>
-        <div class="endpoint">
-          <div class="endpoint-name">Login JWT</div>
-          <div class="endpoint-url">/api/token/</div>
-        </div>
-        <div class="endpoint">
-          <div class="endpoint-name">Refresh Token</div>
-          <div class="endpoint-url">/api/token/refresh/</div>
-        </div>
-        <div class="endpoint">
-          <div class="endpoint-name">Usuarios y Roles</div>
-          <div class="endpoint-url">/api/users/</div>
-        </div>
-        <div class="endpoint">
-          <div class="endpoint-name">Tanques</div>
-          <div class="endpoint-url">/api/tanks/</div>
-        </div>
-        <div class="endpoint">
-          <div class="endpoint-name">Lecturas ESP32</div>
-          <div class="endpoint-url">/api/readings/</div>
-        </div>
-        <div class="endpoint">
-          <div class="endpoint-name">Alertas</div>
-          <div class="endpoint-url">/api/alerts/</div>
-        </div>
-        <div class="endpoint">
-          <div class="endpoint-name">Logs del Sistema</div>
-          <div class="endpoint-url">/api/system/logs/</div>
-        </div>
+        
       </div>
     </div>
 
