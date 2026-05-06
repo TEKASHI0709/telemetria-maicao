@@ -117,6 +117,17 @@ def api_root(request):
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(6,182,212,0.15);
   }
+  .endpoint-name {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-bottom: 0.2rem;
+  }
+  .endpoint-url {
+    font-size: 0.85rem;
+    color: #22d3ee;
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+  }
   .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
