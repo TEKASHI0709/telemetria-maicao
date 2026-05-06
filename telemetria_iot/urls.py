@@ -101,27 +101,21 @@ def api_root(request):
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 0.75rem;
   }
-  .endpoint {
+.endpoint {
     background: rgba(15,23,41,0.5);
     border: 1px solid rgba(148,163,184,0.1);
     border-radius: 10px;
     padding: 0.85rem 1rem;
     transition: all 0.2s;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
   }
   .endpoint:hover {
     background: rgba(15,23,41,0.8);
-    border-color: rgba(34,211,238,0.3);
-  }
-  .endpoint-name {
-    font-size: 0.85rem;
-    color: #94a3b8;
-    margin-bottom: 0.2rem;
-  }
-  .endpoint-url {
-    font-size: 0.85rem;
-    color: #22d3ee;
-    font-family: 'Courier New', monospace;
-    font-weight: 600;
+    border-color: rgba(34,211,238,0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(6,182,212,0.15);
   }
   .info-grid {
     display: grid;
@@ -215,10 +209,38 @@ def api_root(request):
     <div class="section">
       <div class="section-title">📡 Endpoints disponibles</div>
       <div class="grid">
-        <div class="endpoint">
+        <a href="/admin/" target="_blank" class="endpoint">
           <div class="endpoint-name">Panel Admin</div>
-          <div class="endpoint-url">/admin/</div>
-        </div>
+          <div class="endpoint-url">/admin/ →</div>
+        </a>
+        <a href="/api/token/" target="_blank" class="endpoint">
+          <div class="endpoint-name">Login JWT</div>
+          <div class="endpoint-url">/api/token/ →</div>
+        </a>
+        <a href="/api/token/refresh/" target="_blank" class="endpoint">
+          <div class="endpoint-name">Refresh Token</div>
+          <div class="endpoint-url">/api/token/refresh/ →</div>
+        </a>
+        <a href="/api/users/" target="_blank" class="endpoint">
+          <div class="endpoint-name">Usuarios y Roles</div>
+          <div class="endpoint-url">/api/users/ →</div>
+        </a>
+        <a href="/api/tanks/" target="_blank" class="endpoint">
+          <div class="endpoint-name">Tanques</div>
+          <div class="endpoint-url">/api/tanks/ →</div>
+        </a>
+        <a href="/api/readings/" target="_blank" class="endpoint">
+          <div class="endpoint-name">Lecturas ESP32</div>
+          <div class="endpoint-url">/api/readings/ →</div>
+        </a>
+        <a href="/api/alerts/" target="_blank" class="endpoint">
+          <div class="endpoint-name">Alertas</div>
+          <div class="endpoint-url">/api/alerts/ →</div>
+        </a>
+        <a href="/api/system/logs/" target="_blank" class="endpoint">
+          <div class="endpoint-name">Logs del Sistema</div>
+          <div class="endpoint-url">/api/system/logs/ →</div>
+        </a>
         <div class="endpoint">
           <div class="endpoint-name">Login JWT</div>
           <div class="endpoint-url">/api/token/</div>
