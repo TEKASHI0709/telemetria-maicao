@@ -3,7 +3,6 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Reading
 from .serializers import ReadingSerializer
 from alerts.models import Alert
-from tanks.models import Tank
 
 
 class ReadingViewSet(viewsets.ModelViewSet):
@@ -23,8 +22,9 @@ class ReadingViewSet(viewsets.ModelViewSet):
     def generar_alertas(self, reading):
         nivel = reading.level_percent
         tank = reading.tank
+        litros_actuales = round((nivel / 100) * tank.capacity_liters, 1)
+        litros_totales = tank.capacity_liters
 
-        # Verificar si ya existe una alerta activa del mismo tipo para este tanque
         def alerta_activa(tipo):
             return Alert.objects.filter(
                 tank=tank,
@@ -32,37 +32,33 @@ class ReadingViewSet(viewsets.ModelViewSet):
                 is_read=False
             ).exists()
 
-        # DESBORDAMIENTO: nivel mayor o igual a 95%
         if nivel >= 95:
             if not alerta_activa('OVERFLOW'):
                 Alert.objects.create(
                     tank=tank,
                     alert_type='OVERFLOW',
-                    message=f'⚠️ Tanque "{tank.name}" al {nivel:.1f}% - Riesgo de desbordamiento',
+                    message=f'⚠️ Tanque "{tank.name}" al {nivel:.1f}% ({litros_actuales}L de {litros_totales}L) - Riesgo de desbordamiento',
                     is_read=False
                 )
 
-        # NIVEL CRÍTICO: nivel menor a 20%
         elif nivel < 20:
             if not alerta_activa('CRITICAL'):
                 Alert.objects.create(
                     tank=tank,
                     alert_type='CRITICAL',
-                    message=f'🔴 Tanque "{tank.name}" en nivel crítico: {nivel:.1f}%',
+                    message=f'🔴 Tanque "{tank.name}" en nivel crítico: {nivel:.1f}% - Solo quedan {litros_actuales}L de {litros_totales}L',
                     is_read=False
                 )
 
-        # NIVEL BAJO: nivel entre 20% y 40%
         elif nivel < 40:
             if not alerta_activa('LOW'):
                 Alert.objects.create(
                     tank=tank,
                     alert_type='LOW',
-                    message=f'🟡 Tanque "{tank.name}" con nivel bajo: {nivel:.1f}%',
+                    message=f'🟡 Tanque "{tank.name}" con nivel bajo: {nivel:.1f}% ({litros_actuales}L de {litros_totales}L)',
                     is_read=False
                 )
 
-        # Si el nivel vuelve a la normalidad (mayor a 40%), marcar alertas anteriores como leídas
         else:
             Alert.objects.filter(
                 tank=tank,
